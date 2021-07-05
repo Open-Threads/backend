@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": false,
+    "es2017": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "comma-dangle": ["error", "only-multiline"],
+    "quotes": ["error", "double"],
+    "arrow-parens": ["error", "as-needed"],
+    "object-curly-newline": [
+      "error",
+      { "multiline": true, "consistent": true }
+    ],
+  }
+}
