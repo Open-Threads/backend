@@ -6,6 +6,6 @@ export default interface IRepository<T> {
   create(entity: T): Promise<T>;
   findOne(uuid: string): Promise<T>;
   findAll(): Promise<Array<T>>;
-  remove(uuid: string): Promise<T>;
+  remove(uuid: string): Promise<void>;
   update(uuid: string, data: T): Promise<T>;
 }
