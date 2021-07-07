@@ -6,7 +6,7 @@ import IUser from "../../interfaces/IUser";
 import UserModel from "../../models/UserModel";
 
 export default class UserRepository implements IRepository<IUser> {
-  constructor(model: Model<IUser> = UserModel) {}
+  public readonly model: Model<IUser> = UserModel;
 
   public async create(user: IUser): Promise<IUser> {
     const userExists: boolean = !!(await this.model.findOne({
