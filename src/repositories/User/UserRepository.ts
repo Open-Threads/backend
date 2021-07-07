@@ -4,6 +4,7 @@ import IRepository from "../IRepository";
 import IUser from "../../interfaces/IUser";
 
 import UserModel from "../../models/UserModel";
+import UserRepositoryHandler from "./UserRepositoryHandler";
 
 export default class UserRepository implements IRepository<IUser> {
   public readonly model: Model<IUser> = UserModel;
@@ -17,9 +18,12 @@ export default class UserRepository implements IRepository<IUser> {
       throw new Error("User already exists!");
     }
 
-    const createdUser: IUser = await new this.model(user).save();
+    const handledUser: IUser = await UserRepositoryHandler.handleHashPassword(
+      user,
+    );
+    const createdUser: IUser = await new this.model(handledUser).save();
 
-    return createdUser;
+    return UserRepositoryHandler.handleSensibleDataHide(createdUser);
   }
 
   public async findOne(uuid: string): Promise<IUser> {
@@ -29,11 +33,16 @@ export default class UserRepository implements IRepository<IUser> {
       throw new Error("User doesn't exists!");
     }
 
-    return user;
+    return UserRepositoryHandler.handleSensibleDataHide(user);
   }
 
   public async findMany(): Promise<Array<IUser>> {
-    return this.model.find();
+    const users: Array<IUser> = await this.model.find();
+
+    return users.map(
+      (user: IUser): IUser =>
+        UserRepositoryHandler.handleSensibleDataHide(user),
+    );
   }
 
   public async remove(uuid: string): Promise<void> {
