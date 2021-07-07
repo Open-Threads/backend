@@ -27,7 +27,9 @@ export default class UserRepository implements IRepository<IUser> {
   }
 
   public async findOne(uuid: string): Promise<IUser> {
-    const user: IUser | null = await this.model.findOne({ uuid });
+    const user: IUser | null = await this.model.findOne({
+      $or: [{ uuid }, { email: uuid }],
+    });
 
     if (!user) {
       throw new Error("User doesn't exists!");
