@@ -7,6 +7,7 @@ connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   },
   (): void => console.log("Connected to database"),
 );
