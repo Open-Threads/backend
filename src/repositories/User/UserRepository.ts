@@ -50,6 +50,8 @@ export default class UserRepository implements IRepository<IUser> {
   }
 
   public async update(uuid: string, data: IUser): Promise<IUser> {
+    Object.assign(data, { updatedAt: new Date().toLocaleString() });
+
     await this.model.findOneAndUpdate({ uuid }, data);
 
     return this.findOne(uuid);
