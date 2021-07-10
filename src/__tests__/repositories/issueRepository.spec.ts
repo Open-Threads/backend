@@ -8,13 +8,14 @@ import IUser from "../../interfaces/IUser";
 
 describe("Issue Repository tests suite", (): void => {
   const issueRepository: IssueRepository = new IssueRepository();
+  const userRepository: UserRepository = new UserRepository();
 
   const model: IIssue = {
     content: "test",
   };
 
   beforeAll(async (): Promise<void> => {
-    const user: IUser = await new UserRepository().create({
+    const user: IUser = await userRepository.create({
       username: "test",
       email: "test@email.com",
       password: "123",
@@ -24,7 +25,7 @@ describe("Issue Repository tests suite", (): void => {
   });
 
   afterAll(async (): Promise<void> => {
-    await new UserRepository().remove(model.creatorUuid!);
+    await userRepository.remove(model.creatorUuid!);
   });
 
   it("Create a issue", async (): Promise<void> => {
