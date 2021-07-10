@@ -63,4 +63,24 @@ describe("Issue Repository tests suite", (): void => {
 
     expect(issue).toStrictEqual(undefined);
   });
+
+  it("Vote up", async (): Promise<void> => {
+    const issue: void = await issueRepository.vote(
+      model.uuid!,
+      "up",
+      model.creatorUuid!,
+    );
+
+    expect(issue).toStrictEqual(undefined);
+  });
+
+  it("Vote down", async (): Promise<void> => {
+    const issue: void = await issueRepository.vote(
+      model.uuid!,
+      "down",
+      model.creatorUuid!,
+    );
+
+    expect(issue).toStrictEqual(undefined);
+  });
 });
