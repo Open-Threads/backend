@@ -3,6 +3,8 @@ import Env from "./config/Env";
 
 import "./database/connect";
 
-const server: Server = new Server(Env.PORT, []);
+import userRouter from "./routers/userRouter";
+
+const server: Server = new Server(Env.PORT, [userRouter]);
 
 server.init();
