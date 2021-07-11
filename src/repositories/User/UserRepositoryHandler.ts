@@ -7,9 +7,7 @@ export default class UserRepositoryHandler {
     const salt: string = await bcrypt.genSalt(10);
     const hash: string = await bcrypt.hash(user.password!, salt);
 
-    user.password = hash;
-
-    return user;
+    return { ...user, password: hash };
   }
 
   public static handleSensibleDataHide(user: IUser): IUser {
