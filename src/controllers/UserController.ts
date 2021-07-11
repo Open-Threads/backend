@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import HttpException from "../exceptions/HttpException";
 
 import IController from "./IController";
 import IRepository from "../repositories/IRepository";
@@ -10,15 +11,23 @@ export default class UserController implements IController<IUser> {
   public readonly repository: IRepository<IUser> = new UserRepository();
 
   public async create(req: Request, res: Response): Promise<Response<IUser>> {
-    const user: IUser = await this.repository.create(req.body);
+    try {
+      const user: IUser = await this.repository.create(req.body);
 
-    return res.status(201).json(user);
+      return res.status(201).json(user);
+    } catch (err) {
+      return new HttpException(res).throw(err.statusCode, err.message);
+    }
   }
 
   public async findOne(req: Request, res: Response): Promise<Response<IUser>> {
-    const user: IUser = await this.repository.findOne(req.params.uuid);
+    try {
+      const user: IUser = await this.repository.findOne(req.params.uuid);
 
-    return res.json(user);
+      return res.json(user);
+    } catch (err) {
+      return new HttpException(res).throw(err.statusCode, err.message);
+    }
   }
 
   public async findMany(
@@ -31,17 +40,25 @@ export default class UserController implements IController<IUser> {
   }
 
   public async update(req: Request, res: Response): Promise<Response<IUser>> {
-    const user: IUser = await this.repository.update(
-      (req as any).currentUser,
-      req.body,
-    );
+    try {
+      const user: IUser = await this.repository.update(
+        (req as any).currentUser,
+        req.body,
+      );
 
-    return res.json(user);
+      return res.json(user);
+    } catch (err) {
+      return new HttpException(res).throw(err.statusCode, err.message);
+    }
   }
 
   public async remove(req: Request, res: Response): Promise<Response<void>> {
-    await this.repository.remove((req as any).currentUser);
+    try {
+      await this.repository.remove((req as any).currentUser);
 
-    return res.status(202);
+      return res.status(202);
+    } catch (err) {
+      return new HttpException(res).throw(err.statusCode, err.message);
+    }
   }
 }
