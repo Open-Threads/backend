@@ -59,12 +59,6 @@ describe("Issue Repository tests suite", (): void => {
     expect(issue.content).toStrictEqual("update test");
   });
 
-  it("Remove a issue", async (): Promise<void> => {
-    const issue: void = await issueRepository.remove(model.uuid!);
-
-    expect(issue).toStrictEqual(undefined);
-  });
-
   it("Vote up", async (): Promise<void> => {
     const issue: void = await issueRepository.vote(
       model.uuid!,
@@ -81,6 +75,12 @@ describe("Issue Repository tests suite", (): void => {
       "down",
       model.creatorUuid!,
     );
+
+    expect(issue).toStrictEqual(undefined);
+  });
+
+  it("Remove a issue", async (): Promise<void> => {
+    const issue: void = await issueRepository.remove(model.uuid!);
 
     expect(issue).toStrictEqual(undefined);
   });

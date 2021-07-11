@@ -53,7 +53,7 @@ export default class IssueRepository
       this.model.findOneAndUpdate(
         { uuid: issue.linkedUuid, creatorUuid: currentUser },
         {
-          $pop: { linkedIssues: issue.uuid },
+          $pull: { linkedIssues: issue.uuid },
         },
       );
     }
@@ -78,18 +78,18 @@ export default class IssueRepository
   ): Promise<void> {
     const issue: IIssue = await this.findOne(uuid, currentUser);
     const push: string = direction === "up" ? "votesUp" : "votesDown";
-    const pop: string = direction === "up" ? "votesDown" : "votesUp";
+    const pull: string = direction === "up" ? "votesDown" : "votesUp";
 
     if (issue.alreadyVoted === direction) {
       await this.model.findOneAndUpdate(
         { uuid },
-        { $pop: { [push]: currentUser } },
+        { $pull: { [push]: currentUser } },
       );
     } else {
       if (issue.alreadyVoted) {
         await this.model.findOneAndUpdate(
           { uuid },
-          { $pop: { [pop]: currentUser } },
+          { $pull: { [pull]: currentUser } },
         );
       }
 
