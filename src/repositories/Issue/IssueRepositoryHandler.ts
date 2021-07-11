@@ -20,6 +20,17 @@ export default class IssueRepositoryHandler {
         ? issue.votesUp - issue.votesDown
         : issue.votesDown - issue.votesUp;
 
+    if (issue.linkedIssues!.length) {
+      const linkedIssues: Array<IIssue> = (
+        issue.linkedIssues! as Array<IIssue>
+      ).map(
+        (issue: IIssue): IIssue =>
+          IssueRepositoryHandler.handleVotes(issue, userUuid),
+      );
+
+      issue.linkedIssues = linkedIssues;
+    }
+
     return issue;
   }
 }

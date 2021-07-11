@@ -35,7 +35,7 @@ export default class IssueRepository
     }
 
     const linkedIssues: Array<IIssue> = await this.model.find({
-      uuid: { $in: issue.linkedIssues! },
+      uuid: { $in: issue.linkedIssues! as Array<string> },
     });
 
     Object.assign(issue, { linkedIssues });

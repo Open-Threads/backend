@@ -9,7 +9,7 @@ export default interface IIssue {
   votesDown?: Array<string> | number;
   votes?: number;
   alreadyVoted?: Vote;
-  linkedIssues?: Array<string>;
+  linkedIssues?: Array<string> | Array<IIssue>;
   createdAt?: string;
   updatedAt?: string;
 }
