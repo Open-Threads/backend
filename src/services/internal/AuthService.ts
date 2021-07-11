@@ -22,8 +22,6 @@ export default class AuthService {
       throw new Error("Invalid password");
     }
 
-    user.password = undefined;
-
     return JsonWebToken.encode({
       uuid: user.uuid!,
       username: user.username,
