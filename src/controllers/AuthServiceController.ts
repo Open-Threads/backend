@@ -19,7 +19,7 @@ export default class AuthServiceController extends AuthService {
         token,
       });
     } catch (err) {
-      return new HttpException(res).throw(err.message, 403);
+      return new HttpException(res).throw(err.message, 401);
     }
   }
 
@@ -27,7 +27,7 @@ export default class AuthServiceController extends AuthService {
     try {
       return res.json((req as any).currentUser);
     } catch (err) {
-      return new HttpException(res).throw(err.message, 403);
+      return new HttpException(res).throw(err.message, 401);
     }
   }
 }

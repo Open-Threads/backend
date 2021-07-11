@@ -20,7 +20,7 @@ export default class AuthMiddleware {
 
       next();
     } catch (err) {
-      return new HttpException(res).throw(err.message, 403);
+      return new HttpException(res).throw(err.message, 401);
     }
   }
 }
