@@ -56,7 +56,7 @@ export default class UserController implements IController<IUser> {
     try {
       await this.repository.remove((req as any).currentUser.uuid);
 
-      return res.status(202);
+      return res.status(202).json();
     } catch (err) {
       return new HttpException(res).throw(err.message, 406);
     }
