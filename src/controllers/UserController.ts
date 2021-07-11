@@ -42,7 +42,7 @@ export default class UserController implements IController<IUser> {
   public async update(req: Request, res: Response): Promise<Response<IUser>> {
     try {
       const user: IUser = await this.repository.update(
-        (req as any).currentUser,
+        (req as any).currentUser.uuid,
         req.body,
       );
 
@@ -54,7 +54,7 @@ export default class UserController implements IController<IUser> {
 
   public async remove(req: Request, res: Response): Promise<Response<void>> {
     try {
-      await this.repository.remove((req as any).currentUser);
+      await this.repository.remove((req as any).currentUser.uuid);
 
       return res.status(202);
     } catch (err) {
