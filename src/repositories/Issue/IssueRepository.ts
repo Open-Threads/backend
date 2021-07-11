@@ -34,6 +34,12 @@ export default class IssueRepository
       throw new Error("This issue doesn't exists");
     }
 
+    const linkedIssues: Array<IIssue> = await this.model.find({
+      uuid: { $in: issue.linkedIssues! },
+    });
+
+    Object.assign(issue, { linkedIssues });
+
     return IssueRepositoryHandler.handleVotes(issue, currentUser);
   }
 
