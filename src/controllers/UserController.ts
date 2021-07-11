@@ -16,7 +16,7 @@ export default class UserController implements IController<IUser> {
 
       return res.status(201).json(user);
     } catch (err) {
-      return new HttpException(res).throw(err.statusCode, err.message);
+      return new HttpException(res).throw(err.message, 406);
     }
   }
 
@@ -26,7 +26,7 @@ export default class UserController implements IController<IUser> {
 
       return res.json(user);
     } catch (err) {
-      return new HttpException(res).throw(err.statusCode, err.message);
+      return new HttpException(res).throw(err.message, 404);
     }
   }
 
@@ -48,7 +48,7 @@ export default class UserController implements IController<IUser> {
 
       return res.json(user);
     } catch (err) {
-      return new HttpException(res).throw(err.statusCode, err.message);
+      return new HttpException(res).throw(err.message, 406);
     }
   }
 
@@ -58,7 +58,7 @@ export default class UserController implements IController<IUser> {
 
       return res.status(202);
     } catch (err) {
-      return new HttpException(res).throw(err.statusCode, err.message);
+      return new HttpException(res).throw(err.message, 406);
     }
   }
 }
