@@ -1,4 +1,3 @@
-import "dotenv/config";
 import "../../../database/connect";
 
 import IUser from "../../../interfaces/IUser";
