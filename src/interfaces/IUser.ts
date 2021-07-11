@@ -4,5 +4,5 @@ export default interface IUser {
   email?: string;
   password?: string;
   createdAt?: string;
-  updateAt?: string;
+  updatedAt?: string;
 }
