@@ -13,7 +13,7 @@ export default class JsonWebToken {
 
   public static decode(token: string): any {
     try {
-      return jwt.verify(token, Env.TOKEN_DURATION);
+      return jwt.verify(token, Env.TOKEN_SECRET);
     } catch (err) {
       throw new Error("Invalid token");
     }
