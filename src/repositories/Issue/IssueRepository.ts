@@ -2,10 +2,13 @@ import { Model } from "mongoose";
 
 import IRepository from "../IRepository";
 import IIssue, { Vote } from "../../interfaces/IIssue";
-import IssueRepositoryFeaturesContract from "./IssueRepositoryFeaturesContract";
 
 import IssueModel from "../../models/IssueModel";
 import IssueRepositoryHandler from "./IssueRepositoryHandler";
+
+interface IssueRepositoryFeaturesContract {
+  vote(targetUuid: string, direction: Vote): Promise<void>;
+}
 
 export default class IssueRepository
   implements IRepository<IIssue>, IssueRepositoryFeaturesContract
