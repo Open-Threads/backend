@@ -59,7 +59,7 @@ export default class IssueRepository
     const issue: IIssue | null = await this.model.findOneAndRemove({ uuid });
 
     if (issue?.linkedUuid) {
-      this.model.findOneAndUpdate(
+      await this.model.findOneAndUpdate(
         { uuid: issue.linkedUuid, creatorUuid: currentUser },
         {
           $pull: { linkedIssues: issue.uuid },
